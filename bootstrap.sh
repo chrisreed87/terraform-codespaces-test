@@ -1,12 +1,6 @@
 #!/bin/bash
 
-sudo apt-get update && sudo apt-get install \
-  curl \
-  git
-
-sudo git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
-echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
-echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
-source ~/.bashrc
-asdf plugin-add terraform
-asdf install
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install terraform
